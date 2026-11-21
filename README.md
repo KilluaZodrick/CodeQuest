@@ -1,21 +1,57 @@
 # CodeQuest
 site ceiado usando Claude Ia, primeiro projeto pessoal usando prompt e automaçao IA 
 
-TAREFAS
+Quiz de programação Front-end e Back-end com visual estilo matrix (cinza escuro, verde e números caindo ao fundo).
 
-1. Estrutura: separe o arquivo único em index.html, css/style.css, js/questions.js (as questões de Front-end e Back-end), js/storage.js, js/app.js e js/rain.js (chuva de números verde). Mantenha o visual idêntico: fundo cinza escuro, verde forte (#00ff41) nas bordas e botões, texto branco, números caindo de forma sutil e quase transparente.
+🔗 Site: https://SEU-USUARIO.github.io/SEU-REPOSITORIO/ 📦 Código: https://github.com/SEU-USUARIO/SEU-REPOSITORIO
 
-2. Remover a dependência do claude.ai:
-   - Crie js/storage.js com uma interface única (getAccount, putAccount, getProgress, putProgress, getLearned, putLearned, getWrong, putWrong) implementada com localStorage. O resto do código só fala com essa interface.
-   - Troque as chamadas claude.use("db") por esse módulo.
-   - A IA avaliadora (claude.use("sample")) não existe fora do claude.ai: deixe a função judge() desligada por padrão, retornando null, e documente como plugar uma API própria usando um servidor intermediário (nunca coloque chave de API no front-end). Mantenha o aprendizado local: respostas aceitas e erros comuns continuam salvos no storage.
-   - Pergunte-me se quero também um adaptador opcional para Supabase ou Firebase (contas compartilhadas entre dispositivos). Se eu não responder, use só localStorage.
+Troque SEU-USUARIO e SEU-REPOSITORIO pelos seus dados.
 
-3. Preserve todas as funcionalidades: cadastro e login (usuário, nome de exibição de 2 a 24 caracteres, senha com hash PBKDF2), troca do nome de exibição a cada 90 dias, progresso por usuário, botão Front-end/Back-end, 3 níveis com 5 questões por trilha, 3 tentativas com dica a cada erro, código correto e alternativas ao final, níveis liberados em sequência, continuar de onde parou e refazer nível, sair da conta.
+Recursos
+Duas trilhas (Front-end e Back-end), cada uma com 3 níveis: Básico, Médio e Avançado
+5 questões por nível. A resposta é código digitado (não é múltipla escolha)
+3 tentativas por questão, com uma dica nova a cada erro
+No final de cada questão: código correto e outras formas de resolver
+Um nível só é liberado quando todas as questões do anterior são acertadas
+Cadastro e login (usuário, senha e nome de exibição), com progresso salvo por usuário
+O nome de exibição pode ser trocado a cada 3 meses
+Continuar de onde parou ou refazer um nível
+Como rodar localmente
+python -m http.server 8000
+# abra http://localhost:8000
+Também funciona com npx serve. Abrir o index.html direto no navegador costuma funcionar, mas o cadastro usa a API de criptografia do navegador, que prefere localhost ou HTTPS.
 
-4. Arquivos do repositório: README.md em português (descrição, lista de recursos, como rodar localmente, como adicionar questões, aviso de que o login é só para estudo e não é seguro, limitações, estrutura de pastas e espaço para uma captura de tela), LICENSE (MIT), .gitignore, .nojekyll e .github/workflows/pages.yml para publicar no GitHub Pages a cada push na branch main (actions/configure-pages, upload-pages-artifact e deploy-pages).
+Como publicar no GitHub Pages
+Crie um repositório no GitHub e envie estes arquivos para a branch main.
+No repositório, abra Settings → Pages e, em Source, escolha GitHub Actions.
+O workflow em .github/workflows/pages.yml publica o site a cada push. Em 1 a 2 minutos o link aparece na aba Actions e em Settings → Pages.
+Link final: https://SEU-USUARIO.github.io/SEU-REPOSITORIO/
 
-5. Teste antes de publicar: rode um servidor local (npx serve ou python -m http.server) e use um navegador headless (Playwright) para cadastrar, sair, entrar, alternar Front-end/Back-end, acertar e errar uma questão, ver as dicas e confirmar o desbloqueio do nível seguinte. Corrija o que falhar.
+Estrutura
+index.html          página principal
+css/style.css       visual
+js/questions.js     questões das duas trilhas
+js/app.js           telas, login, progresso e correção
+js/storage.js       armazenamento local (localStorage)
+js/rain.js          números caindo no fundo
+js/config.js        configuração opcional (IA avaliadora)
+Como adicionar questões
+Em js/questions.js, cada questão tem este formato:
 
-6. Publicação: pergunte meu usuário do GitHub e o nome do repositório. Se o GitHub CLI (gh) estiver instalado e autenticado, faça git init, commit, crie o repositório público e envie o código (gh repo create --public --source=. --push) e ative o Pages com GitHub Actions. Se não for possível, me entregue os comandos exatos para eu rodar.
-
+{
+  t: 'Front',                       // 'Front' ou 'Back'
+  q: 'Enunciado da questão.',
+  ok: [/^p\{color:red;?\}$/],       // regex(s) aceitos. O texto é normalizado antes:
+                                    // minúsculas, sem espaços e aspas simples viram duplas
+  h: ['Dica 1', 'Dica 2'],          // uma dica por erro
+  code: 'p { color: red; }',        // código correto mostrado no final
+  alt: 'Outras formas de resolver.' // texto das alternativas
+}
+Limitações e segurança
+Este é um projeto base de estudo, não seguro. Contas e progresso ficam no localStorage do navegador de cada pessoa: não são compartilhados entre aparelhos nem protegidos por servidor. A senha é guardada como hash (PBKDF2), mas qualquer pessoa com acesso ao navegador consegue ver os dados.
+Não use senhas reais de outros serviços.
+A correção compara o texto digitado com padrões (regex); o código não é executado. Uma solução correta, mas muito diferente da esperada, pode ser recusada: inclua novas regex em ok.
+A IA avaliadora e a memória de aprendizado existem no código, mas vêm desligadas. Para ligar, veja js/config.js. Nunca coloque chave de API no front-end: use um servidor intermediário.
+Para contas compartilhadas entre dispositivos, troque o LocalDB (js/storage.js) por um banco na nuvem, como Supabase ou Firebase.
+Licença
+MIT. Veja o arquivo LICENSE.
