@@ -19,4 +19,3 @@ TAREFAS
 
 6. Publicação: pergunte meu usuário do GitHub e o nome do repositório. Se o GitHub CLI (gh) estiver instalado e autenticado, faça git init, commit, crie o repositório público e envie o código (gh repo create --public --source=. --push) e ative o Pages com GitHub Actions. Se não for possível, me entregue os comandos exatos para eu rodar.
 
-7. Entrega final: mostre a árvore de arquivos, o link do repositório (https://github.com/USUARIO/REPO) e o link do site (https://USUARIO.github.io/REPO/), e coloque os dois links no topo do README.
