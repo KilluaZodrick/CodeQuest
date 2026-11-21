@@ -3,7 +3,7 @@ site ceiado usando Claude Ia, primeiro projeto pessoal usando prompt e automaça
 
 Quiz de programação Front-end e Back-end com visual estilo matrix (cinza escuro, verde e números caindo ao fundo).
 
-🔗 Site: https://SEU-USUARIO.github.io/SEU-REPOSITORIO/ 📦 Código: https://github.com/SEU-USUARIO/SEU-REPOSITORIO
+🔗 Site: https://KilluaZodrick.github.io/CodeQuest/ 📦 Código: https://github.com/KilluaZodrick/CodeQuest
 
 Troque SEU-USUARIO e SEU-REPOSITORIO pelos seus dados.
 
