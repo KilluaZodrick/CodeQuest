@@ -25,7 +25,7 @@ Como publicar no GitHub Pages
 Crie um repositório no GitHub e envie estes arquivos para a branch main.
 No repositório, abra Settings → Pages e, em Source, escolha GitHub Actions.
 O workflow em .github/workflows/pages.yml publica o site a cada push. Em 1 a 2 minutos o link aparece na aba Actions e em Settings → Pages.
-Link final: https://SEU-USUARIO.github.io/SEU-REPOSITORIO/
+Link final: https://KilluaZodrick.github.io/CodeQuest/
 
 Estrutura
 index.html          página principal
